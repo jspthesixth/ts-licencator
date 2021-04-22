@@ -4,6 +4,10 @@ type AddItemButtonProps = {
   dark?: boolean;
 };
 
+type CloseButtonProps = {
+  img?: string;
+};
+
 export const AppContainer = styled.div`
   background-color: #3179ba;
   height: 100%;
@@ -52,7 +56,7 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
   background-color: #ffffff3d;
   border-radius: 3px;
   border: none;
-  color: ${props => (props.dark ? '#000' : '#fff')};
+  color: ${(props) => (props.dark ? '#000' : '#fff')};
   cursor: pointer;
   max-width: 300px;
   padding: 10px 12px;
@@ -89,4 +93,19 @@ export const NewItemInput = styled.input`
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   width: 100%;
+`;
+
+export const ColumnHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const CloseButton = styled.button<CloseButtonProps>`
+  cursor: pointer;
+  border: none;
+  outline: none;
+`;
+
+export const ButtonImage = styled.img`
+  width: ${(props) => (props.width ? props.width : '12px')};
 `;

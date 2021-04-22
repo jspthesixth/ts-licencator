@@ -9,7 +9,7 @@ export const ColumnContainer: FC = () => {
 
   return organizations.length > 0 ? (
     <>
-      {organizations.map(item => (
+      {organizations.map((item) => (
         <Column
           key={item.id}
           id={item.id}

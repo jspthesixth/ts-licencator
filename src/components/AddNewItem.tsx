@@ -12,14 +12,14 @@ export const AddNewItem = ({ toggleButtonText, dark }: AddNewItemProps) => {
 
   if (showForm) {
     return (
-      <NewItemForm showForm={() => setShowForm(prevState => !prevState)} />
+      <NewItemForm showForm={() => setShowForm((prevState) => !prevState)} />
     );
   }
 
   return (
     <AddItemButton
       dark={dark}
-      onClick={() => setShowForm(prevState => !prevState)}
+      onClick={() => setShowForm((prevState) => !prevState)}
     >
       {toggleButtonText}
     </AddItemButton>

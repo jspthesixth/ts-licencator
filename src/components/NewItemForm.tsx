@@ -32,10 +32,10 @@ export const NewItemForm = ({ showForm }: NewItemFormProps) => {
       name.trim() === '' ||
       address.trim() === '' ||
       country.trim() === ''
-    )
+    ) {
       showForm();
-
-    return;
+      return;
+    }
 
     dispatch(addOrganization(organization));
     showForm();
