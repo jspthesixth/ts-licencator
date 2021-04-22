@@ -5,12 +5,18 @@ type AddItemButtonProps = {
 };
 
 export const AppContainer = styled.div`
+  background-color: #3179ba;
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+`;
+
+export const RegistrationCardsContainer = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   background-color: #3179ba;
   display: flex;
   flex-flow: row wrap;
-  height: 100%;
   padding: 20px;
 `;
 

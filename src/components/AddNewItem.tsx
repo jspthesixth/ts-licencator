@@ -3,31 +3,24 @@ import { AddItemButton } from './styles';
 import { NewItemForm } from './NewItemForm';
 
 type AddNewItemProps = {
-  onAdd(text: string): void;
   toggleButtonText: string;
   dark?: boolean;
 };
 
-export const AddNewItem = ({
-  onAdd,
-  toggleButtonText,
-  dark,
-}: AddNewItemProps) => {
+export const AddNewItem = ({ toggleButtonText, dark }: AddNewItemProps) => {
   const [showForm, setShowForm] = useState(false);
 
   if (showForm) {
     return (
-      <NewItemForm
-        onAdd={text => {
-          onAdd(text);
-          setShowForm(false);
-        }}
-      />
+      <NewItemForm showForm={() => setShowForm(prevState => !prevState)} />
     );
   }
 
   return (
-    <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
+    <AddItemButton
+      dark={dark}
+      onClick={() => setShowForm(prevState => !prevState)}
+    >
       {toggleButtonText}
     </AddItemButton>
   );
