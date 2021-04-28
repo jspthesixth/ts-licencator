@@ -1,13 +1,15 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import {
   ColumnContainer,
   ColumnTitle,
   ColumnHeader,
   CloseButton,
   ButtonImage,
-} from './styles';
-import { AddNewItem } from './AddNewItem';
-import close from '../assets/icons/close.svg';
+} from '../styles';
+import { AddNewItem } from '../forms/AddNewItem';
+import { Card } from './Card';
+import { AppStateContext } from '../../context';
+import close from '../../assets/icons/close.svg';
 
 type ColumnProps = React.PropsWithChildren<{
   id: string;
@@ -22,6 +24,10 @@ export const Column: FC<ColumnProps> = ({
   address,
   country,
 }: ColumnProps) => {
+  const {
+    state: { serialNumbers },
+  } = useContext(AppStateContext);
+
   return (
     <ColumnContainer>
       <ColumnHeader>
@@ -36,8 +42,13 @@ export const Column: FC<ColumnProps> = ({
           </CloseButton>
         </ColumnTitle>
       </ColumnHeader>
-
-      <AddNewItem toggleButtonText='+ Dodaj novi ključ' dark />
+      {serialNumbers.map(
+        item =>
+          item.organizationName === name && (
+            <Card key={item.id} text={item.serialNumber} />
+          )
+      )}
+      <AddNewItem name={name} toggleButtonText='+ Dodaj novi ključ' dark />
     </ColumnContainer>
   );
 };

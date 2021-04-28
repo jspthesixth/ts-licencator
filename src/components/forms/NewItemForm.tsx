@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
-import { OrganizationItem } from '../types';
-import { useFocus } from '../hooks/useFocus';
-import { NewItemFormContainer, NewItemButton, NewItemInput } from './styles';
-import { OrganizationContext } from '../context/OrganizationContext';
-import { addOrganization } from '../actions/OrganizationActions';
+import { OrganizationItem } from '../../types';
+import { useFocus } from '../../hooks/useFocus';
+import { NewItemFormContainer, NewItemButton, NewItemInput } from '../styles';
+import { AppStateContext } from '../../context';
+import { addOrganization } from '../../actions/OrganizationActions';
 
 type NewItemFormProps = {
   showForm(): void;
@@ -20,7 +20,7 @@ export const NewItemForm = ({ showForm }: NewItemFormProps) => {
     country: '',
   });
 
-  const { dispatch } = useContext(OrganizationContext);
+  const { dispatch } = useContext(AppStateContext);
 
   const inputRef = useFocus();
 
@@ -45,13 +45,6 @@ export const NewItemForm = ({ showForm }: NewItemFormProps) => {
     <NewItemFormContainer>
       <NewItemInput
         ref={inputRef}
-        value={id}
-        placeholder='ID'
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setOrganizationObject({ ...organizationObject, id: e.target.value })
-        }
-      />
-      <NewItemInput
         value={name}
         placeholder='Ime firme'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

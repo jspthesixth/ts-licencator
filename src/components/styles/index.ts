@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 type AddItemButtonProps = {
   dark?: boolean;
@@ -56,7 +57,7 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
   background-color: #ffffff3d;
   border-radius: 3px;
   border: none;
-  color: ${(props) => (props.dark ? '#000' : '#fff')};
+  color: ${props => (props.dark ? '#000' : '#fff')};
   cursor: pointer;
   max-width: 300px;
   padding: 10px 12px;
@@ -107,5 +108,22 @@ export const CloseButton = styled.button<CloseButtonProps>`
 `;
 
 export const ButtonImage = styled.img`
-  width: ${(props) => (props.width ? props.width : '12px')};
+  width: ${props => (props.width ? props.width : '12px')};
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
+export const TableContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;

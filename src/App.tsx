@@ -1,24 +1,34 @@
-import { useState } from 'react';
-import { OrganizationStateProvider } from './context/OrganizationContext';
+import { AppStateProvider } from './context';
 import { AppContainer, RegistrationCardsContainer } from './components/styles';
-import { Column } from './components/Column';
-import { ColumnContainer } from './components/ColumnContainer';
-import { Card } from './components/Card';
-import { AddNewItem } from './components/AddNewItem';
-import { Navbar } from './components/Navbar';
-import { Search } from './components/Search';
+import { ColumnContainer } from './components/layout/ColumnContainer';
+import { AddNewItem } from './components/forms/AddNewItem';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+import { LicenseItems } from './components/key/LicenseItems';
 
 const App = () => {
   return (
-    <OrganizationStateProvider>
-      <AppContainer>
-        <AddNewItem toggleButtonText='+ Dodaj novu firmu' />
-        <RegistrationCardsContainer>
-          <ColumnContainer />
-        </RegistrationCardsContainer>
-      </AppContainer>
-    </OrganizationStateProvider>
+    <Router>
+      <AppStateProvider>
+        <Switch>
+          <AppContainer>
+            <Route
+              exact
+              path='/'
+              render={props => (
+                <>
+                  <AddNewItem toggleButtonText='+ Dodaj novu firmu' />
+                  <RegistrationCardsContainer>
+                    <ColumnContainer />
+                  </RegistrationCardsContainer>
+                </>
+              )}
+            />
+            <Route exact path='/key/:serialNumber' component={LicenseItems} />
+          </AppContainer>
+        </Switch>
+      </AppStateProvider>
+    </Router>
   );
 };
 
