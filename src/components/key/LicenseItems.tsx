@@ -5,6 +5,8 @@ import './index.css';
 import { useContext } from 'react';
 import { AppStateContext } from '../../context';
 import { AddNewItem } from '../forms/AddNewItem';
+import { useState, useEffect } from 'react';
+import { LicenseItem } from '../../types';
 
 type SerialNumberType = {
   serialNumber: string;
@@ -12,28 +14,40 @@ type SerialNumberType = {
 
 export const LicenseItems = () => {
   const { serialNumber }: SerialNumberType = useParams();
+  const [licensesArr, setLicensesArr] = useState<LicenseItem[]>([]);
 
   const {
     state: { licenses },
   } = useContext(AppStateContext);
 
+  useEffect(() => {
+    const newLicenses = licenses.filter(
+      item => item.serialNumber === serialNumber && item
+    );
+    setLicensesArr(newLicenses);
+  }, [licenses]);
+
   return (
     <>
       <TableContainer>
-        {licenses.length > 0 && (
+        {licensesArr.length > 0 && (
           <table id='customers'>
-            <tr>
-              <th>Ističe</th>
-              <th>Verzija programa</th>
-              <th>Licenca</th>
-              <th>Izradio</th>
-            </tr>
-            {licenses.map(
-              item =>
-                item.serialNumber === serialNumber && (
-                  <License key={item.id} licenseObject={item} />
-                )
-            )}
+            <thead>
+              <tr>
+                <th>Ističe</th>
+                <th>Verzija programa</th>
+                <th>Licenca</th>
+                <th>Izradio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {licensesArr.map(item => (
+                <License
+                  key={item.id as keyof LicenseItem}
+                  licenseObject={item as LicenseItem}
+                />
+              ))}
+            </tbody>
           </table>
         )}
       </TableContainer>
