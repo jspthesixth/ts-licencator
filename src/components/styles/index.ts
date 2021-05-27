@@ -1,16 +1,27 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 type AddItemButtonProps = {
   dark?: boolean;
 };
 
+type CloseButtonProps = {
+  img?: string;
+};
+
 export const AppContainer = styled.div`
+  background-color: #3179ba;
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+`;
+
+export const RegistrationCardsContainer = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   background-color: #3179ba;
   display: flex;
   flex-flow: row wrap;
-  height: 100%;
   padding: 20px;
 `;
 
@@ -83,4 +94,36 @@ export const NewItemInput = styled.input`
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   width: 100%;
+`;
+
+export const ColumnHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const CloseButton = styled.button<CloseButtonProps>`
+  cursor: pointer;
+  border: none;
+  outline: none;
+`;
+
+export const ButtonImage = styled.img`
+  width: ${props => (props.width ? props.width : '12px')};
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
+export const TableContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;

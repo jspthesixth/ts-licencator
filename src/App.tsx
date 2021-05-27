@@ -1,74 +1,34 @@
-import { useState } from 'react';
-import { AppContainer } from './components/styles';
-import { Column } from './components/Column';
-import { Card } from './components/Card';
-import { AddNewItem } from './components/AddNewItem';
-import { Modal } from './components/Modal';
-import { Navbar } from './components/Navbar';
-import { Search } from './components/Search';
+import { AppStateProvider } from './context';
+import { AppContainer, RegistrationCardsContainer } from './components/styles';
+import { ColumnContainer } from './components/layout/ColumnContainer';
+import { AddNewItem } from './components/forms/AddNewItem';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+import { LicenseItems } from './components/key/LicenseItems';
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
-    <AppContainer>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-        <Card text='SN kljuca' />
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <Column text='Firma'>
-        <Card text='SN kljuca' />
-      </Column>
-      <AddNewItem toggleButtonText='+ Dodaj novu firmu' onAdd={console.log} />
-
-      {showModal && (
-        <Modal>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              position: 'absolute',
-              height: '300px',
-              width: '300px',
-              margin: 'auto',
-              background: 'rgba(0,0,0,0.1)',
-              zIndex: 99,
-            }}
-          >
-            I'm a modal!{' '}
-            <button
-              style={{ background: 'papyawhip' }}
-              onClick={() => setShowModal(false)}
-            >
-              close
-            </button>
-          </div>
-        </Modal>
-      )}
-      <button onClick={() => setShowModal(true)}>show Modal</button>
-    </AppContainer>
+    <Router>
+      <AppStateProvider>
+        <Switch>
+          <AppContainer>
+            <Route
+              exact
+              path='/'
+              render={props => (
+                <>
+                  <AddNewItem toggleButtonText='+ Dodaj novu firmu' />
+                  <RegistrationCardsContainer>
+                    <ColumnContainer />
+                  </RegistrationCardsContainer>
+                </>
+              )}
+            />
+            <Route exact path='/key/:serialNumber' component={LicenseItems} />
+          </AppContainer>
+        </Switch>
+      </AppStateProvider>
+    </Router>
   );
 };
 
